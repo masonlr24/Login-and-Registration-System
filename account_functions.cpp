@@ -1,18 +1,9 @@
 #include "account.h"
 
-Account::Account(string user, string pass, string n, int dob)
-{
-    username = user;
-    password = pass;
-    name = n;
-    date_of_birth = dob;
-    num_of_accounts++;
-}
-
-bool login(Account * database, string password = "", string username = "")
+bool login(Account database[], string password, string username)
 {
     bool result;
-    //here
+    
     for (int i = 0; i < database[0].get_num_of_accounts(); i++)
     {
         if (database[i].get_user() == username && database[i].get_pass() == password && database[i].get_num_of_accounts() != 0)
@@ -28,27 +19,21 @@ bool login(Account * database, string password = "", string username = "")
     return result;
 }
 
-void register_account(Account * database)
+Account Account::register_account()
 {
-    string user, pass, n;
-    int dob;
-
     cout << "Enter your desired username: " << endl;
-    cin >> user;
+    cin >> username;
     cout << "Enter your desired password: " << endl;
-    cin >> pass;
+    cin >> password;
     cout << "Enter your name: " << endl;
-    cin >> n;
+    cin >> name;
     cout << "Enter your date of birth: " << endl;
-    cin >> dob;
-    // this is not right
-    for (int i = 0; i < database[0].get_num_of_accounts(); i++)
-    {
-        database[i] = new Account(user, pass, n, dob);
-    }
+    cin >> date_of_birth;
+    num_of_accounts++;
+    return *this;
 }
 
-bool allowed_user(Account * database, string username)
+bool allowed_user(Account database[], string username)
 {
     bool result;
     
@@ -67,7 +52,7 @@ bool allowed_user(Account * database, string username)
     return result;
 }   
 
-bool allowed_pass(Account * database, string password)
+bool allowed_pass(Account database[], string password)
 {
     bool result;
     
