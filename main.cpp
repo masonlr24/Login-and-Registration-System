@@ -3,7 +3,7 @@
 int main()
 {
   string username;
-  string password;
+  string password;~
   Account database[20];
   bool ongoing = true;
 
