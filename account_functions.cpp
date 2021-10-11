@@ -1,12 +1,21 @@
 #include "account.h"
 
-bool login(Account * database, int num_of_accounts, string password = "", string email = "", string username = "")
+Account::Account(string user, string pass, string n, int dob)
+{
+    username = user;
+    password = pass;
+    name = n;
+    date_of_birth = dob;
+    num_of_accounts++;
+}
+
+bool login(Account * database, string password = "", string username = "")
 {
     bool result;
-    
-    for (int x = 0; x < num_of_accounts; x++)
+    //here
+    for (int i = 0; i < database[0].get_num_of_accounts(); i++)
     {
-        if ((database[i].get_user() == username || database[i].get_email() == email) && database[i].get_pass() == password && num_of_accounts != 0)
+        if (database[i].get_user() == username && database[i].get_pass() == password && database[i].get_num_of_accounts() != 0)
         {
             result = true;
         }
@@ -19,19 +28,33 @@ bool login(Account * database, int num_of_accounts, string password = "", string
     return result;
 }
 
-Account register_account(int &num_of_accounts)
+void register_account(Account * database)
 {
+    string user, pass, n;
+    int dob;
+
     cout << "Enter your desired username: " << endl;
-    
+    cin >> user;
+    cout << "Enter your desired password: " << endl;
+    cin >> pass;
+    cout << "Enter your name: " << endl;
+    cin >> n;
+    cout << "Enter your date of birth: " << endl;
+    cin >> dob;
+    // this is not right
+    for (int i = 0; i < database[0].get_num_of_accounts(); i++)
+    {
+        database[i] = new Account(user, pass, n, dob);
+    }
 }
 
-bool allowed_user(Account * database, int num_of_accounts, string username)
+bool allowed_user(Account * database, string username)
 {
     bool result;
     
-    for (int x = 0; x < num_of_accounts; x++)
+    for (int i = 0; i < database[0].get_num_of_accounts(); i++)
     {
-        if ((database[i].get_user() == username)
+        if (database[i].get_user() == username)
         {
             result = false;
         }
@@ -44,13 +67,13 @@ bool allowed_user(Account * database, int num_of_accounts, string username)
     return result;
 }   
 
-bool allowed_pass(Account * database, int num_of_accounts, string password)
+bool allowed_pass(Account * database, string password)
 {
     bool result;
     
-    for (int x = 0; x < num_of_accounts; x++)
+    for (int i = 0; i < database[0].get_num_of_accounts(); i++)
     {
-        if ((database[i].get_pass() == password)
+        if (database[i].get_pass() == password)
         {
             result = false;
         }

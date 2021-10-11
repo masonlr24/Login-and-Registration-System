@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 fg++ *.cpp -o $1
 
 if (( $? == 0 )); then

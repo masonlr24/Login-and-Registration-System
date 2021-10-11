@@ -5,7 +5,6 @@ int main()
   string username;
   string password;
   Account * database[20];
-  int num_of_accounts = 0;
   bool ongoing = true;
 
   cout << "Welcome to the my account registration program" << endl;
@@ -15,7 +14,7 @@ int main()
     switch(promt())
     {
       case 1:
-        if (login(database, num_of_accounts, password, email, username))
+        if (login(database, password, username))
         {
           cout << "Login Successful!" << endl;
         }
@@ -25,7 +24,7 @@ int main()
         }
         break;
       case 2:
-        register_account();
+        register_account(database);
         break;
       default:
         cout << "Invalid input, retry." << endl;
